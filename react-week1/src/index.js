@@ -93,8 +93,8 @@ ReactDOM.render(
 /** Extract Component */
 function formatDate(date) {
     return date.toLocaleDateString();
-  }
-  
+}
+
 function UserInfo(props) {
     return(
         <div className="UserInfo">        
@@ -104,13 +104,19 @@ function UserInfo(props) {
     )
 }
 
+function CommentText(props){
+    return(
+        <div className="Comment-text">
+          {props.text}
+        </div>
+    );
+}
+
 function Comment(props) {
   return (
     <div className="Comment">
       {UserInfo(props)}
-      <div className="Comment-text">
-        {props.text}
-      </div>
+      {CommentText(props)}
       <div className="Comment-date">
         {formatDate(props.date)}
       </div>
