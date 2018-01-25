@@ -12,7 +12,7 @@ ReactDOM.render(
     document.getElementById('Hello_World')
 );
 
-/** Greeting */
+/**JSX: Greeting */
 
 function formatName(someone){
     return someone.firstName + '.D.' + someone.lastName;
@@ -33,5 +33,27 @@ ReactDOM.render(
     Greeting,
     document.getElementById('Greeting')
 )
+
+/** Updating the Rendered Element */
+
+function tick(){
+    const LocaleTime = (
+        <div>
+            <h2># Updating the rendered elements</h2>
+            <p>What time is it?</p>
+            <p>It is {' '}            
+                {new Date().toLocaleTimeString()}
+            </p>
+        </div>
+    )
+
+    ReactDOM.render(
+        LocaleTime,
+        document.getElementById('LocaleTime')
+    )
+    
+};
+
+setInterval(tick, 1000);
 
 registerServiceWorker();
