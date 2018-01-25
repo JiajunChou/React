@@ -5,6 +5,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
+
 /**Hello World */
 ReactDOM.render(
     <h1>Hello, 
@@ -55,5 +56,38 @@ function tick(){
 };
 
 setInterval(tick, 1000);
+
+/**Compenents and Props: Functional and Class Components */
+
+/**Part1 */
+function Welcome(props){
+    return <h2>BTW, Do you see {props.name} ?</h2>
+}
+
+const Compon_Props = <Welcome name="Sara"/>;
+
+ReactDOM.render(
+    Compon_Props,
+    document.getElementById('Compon_Props')
+)
+
+/**part2 */
+function SayHi(props){
+    return <h2> Hey, {props.name}</h2>;
+}
+
+function Applicate(){
+    return(
+        <div>
+            <SayHi name="Zora" />
+            <SayHi name="Nami" />
+            <SayHi name="Frank" />
+        </div>
+    );
+}
+ReactDOM.render(
+    <Applicate />,
+    document.getElementById('SayHi')
+)
 
 registerServiceWorker();
