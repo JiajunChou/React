@@ -95,10 +95,16 @@ function formatDate(date) {
     return date.toLocaleDateString();
 }
 
+function Avatar(props){
+    return(
+        <img className="Avatar" src={props.author.avatarUrl} alt={props.author.name} />
+    );
+}
+
 function UserInfo(props) {
     return(
         <div className="UserInfo">        
-          <img className="Avatar" src={props.author.avatarUrl} alt={props.author.name} />
+          <Avatar author={props.author}/>
           <div className="UserInfo-name">{props.author.name}</div>
         </div>        
     )
