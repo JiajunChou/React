@@ -150,18 +150,25 @@ ReactDOM.render(
 );
 
 /** State and Lifecycle */
-function tiktac(){
-    const seconds = (
-        <div>
-            <h2>{new Date().toLocaleTimeString()}.</h2>
-        </div>
-    );
-    ReactDOM.render(
-        seconds,
-        document.getElementById('Clock')
-    );
+
+class Clock extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {date: new Date()};
+    }
+
+    render(){
+        return (
+            <div>
+                <h2>{this.state.date.toLocaleTimeString()}.</h2>
+            </div>
+        )
+    };
 }
 
-setInterval(tiktac, 1000);
+ReactDOM.render(
+    <Clock />,
+    document.getElementById('Clock')
+)
 
 registerServiceWorker();
