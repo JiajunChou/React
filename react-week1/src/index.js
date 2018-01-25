@@ -148,5 +148,20 @@ ReactDOM.render(
   />,
   document.getElementById('Extract_Compon')
 );
-  
+
+/** State and Lifecycle */
+function tiktac(){
+    const seconds = (
+        <div>
+            <h2>{new Date().toLocaleTimeString()}.</h2>
+        </div>
+    );
+    ReactDOM.render(
+        seconds,
+        document.getElementById('Clock')
+    );
+}
+
+setInterval(tiktac, 1000);
+
 registerServiceWorker();
