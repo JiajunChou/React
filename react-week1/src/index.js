@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
+registerServiceWorker();
 ReactDOM.render(<App />, document.getElementById('root'));
 
 /**Hello World */
@@ -187,4 +188,88 @@ ReactDOM.render(
     document.getElementById('Clock')
 )
 
-registerServiceWorker();
+
+/**Handling Events */
+
+function ActionLink(){
+    function HandleClick(e){
+        e.preventDefault();
+        console.log('The link was clicked.');
+    }
+    return(
+        <a href="#" onClick={HandleClick}>
+          Click me
+        </a>
+    )
+}
+
+ReactDOM.render(
+    <ActionLink />,
+    document.getElementById('ClickHref')
+)
+
+class Toggle extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {isToggleOn: true};
+        
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+        this.setState( prevState => ({
+            isToggleOn: !prevState.isToggleOn
+        }));
+    }
+
+    render(){
+        return(
+          <button onClick={this.handleClick}>
+            {this.state.isToggleOn ? 'ON':'Off'}
+          </button>
+        );
+    }
+
+}
+
+ReactDOM.render(
+    <Toggle />,
+    document.getElementById("Toggle")
+)
+
+/**Loggin Forms */
+
+class Loggin extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {value: ''};
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event){
+        this.setState({value: event.target.value});
+    }
+
+    handleSubmit(event){
+        alert('A name was submitted: ' + this.state.value);
+        event.preventDefault();
+    }
+
+    render(){
+        return (
+            <form onSubmit={this.handleSubmit}>
+              <label>
+                  Account: 
+                  <input type="text" value={this.state.value} onChange={this.handleChange}/>
+              </label>
+              <input type="submit" value="submit" />
+            </form>
+        )        
+    }
+}
+ReactDOM.render(
+    <Loggin />,
+    document.getElementById('Loggin')
+)
