@@ -7,32 +7,46 @@ var BoilingVerdict = function(props){
     return <p>The water would not boil.</p>
 }
 
-class LiftingStateUp extends Component{
+class TemperatureInput extends Component{
     constructor(props){
         super(props);
         this.state = {
-            Celsius: "",
-            Fahrenheit: ""
+            Temperateure: "",
         };
     }
 
     handleChange = (e) => {
-        const name=e.target.name;
-        this.setState({[name]: e.target.value});
+        this.setState({Temperateure: e.target.value});
     }
 
     render(){
         return(
             <div>
-                <legend>Enter temperature in Celsius: </legend>
-                <input name="Celsius" type="text" value={this.state.Celsius} onChange={this.handleChange} />
-                <BoilingVerdict type="Celsius" WaterTemperacture = {this.state.Celsius} />
-                <legend>Enter temperature in Fahrenheit: </legend>
-                <input name="Fahrenheit" type="text" value={this.state.Fahrenheit} onChange={this.handleChange} />
-                <BoilingVerdict type="Fahrenheit" WaterTemperacture = {this.state.Fahrenheit} />
+                <legend>Enter temperature in {this.props.TempType}: </legend>
+                <input name={this.props.TempType} type="text" value={this.state.Temperateure} onChange={this.handleChange} />
+                <BoilingVerdict type={this.props.TempType} WaterTemperacture = {this.state.Temperateure} />
             </div>
         )
     }
 }
 
-export default LiftingStateUp;
+
+const scaleName = {
+    c: "Celsius",
+    f: "Fahrenheit"
+};
+
+
+class Calculator extends Component{
+
+    render(){
+        return(
+            <div>
+                <TemperatureInput TempType={scaleName.c} />
+                <TemperatureInput TempType={scaleName.f} />
+            </div>
+        )
+    }
+}
+
+export default Calculator;
