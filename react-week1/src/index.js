@@ -2,12 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
-import './LogginForm.css';
-import LoggingForm from './LogginForm';
+// import './LogginForm.css';
+// import LoggingForm from './LogginForm';
 // import Calculator  from './LiftingStateUp';
 import registerServiceWorker from './registerServiceWorker';
 
 registerServiceWorker();
 // ReactDOM.render(<App />, document.getElementById('root'));
-ReactDOM.render(<LoggingForm />, document.getElementById('Loggin') );
+ReactDOM.render(
+    <h1>Hello React World</h1>, 
+    document.getElementById('Hello_World')
+);
+// ReactDOM.render(<LoggingForm />, document.getElementById('Loggin') );
 // ReactDOM.render(<Calculator  />, document.getElementById('LiftingStateUp'));
