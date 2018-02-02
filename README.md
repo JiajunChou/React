@@ -24,5 +24,3 @@ https://reactarmory.com/guides/lifecycle-simulators
 
 HomeWork1: Form Logging表單, 要套CSS 表
 HomeWork2: Form 表單
-
-## 
