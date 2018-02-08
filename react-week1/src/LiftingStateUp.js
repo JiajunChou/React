@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 const BoilingVerdict = function(props){
-    if( (props.type === "Celsius" && props.WaterTemperacture >= 100) || (props.type === "Fahrenheit" && props.WaterTemperacture >= 212)){
+    if( (props.type === "C" && props.WaterTemperacture >= 100) || (props.type === "F" && props.WaterTemperacture >= 212)){
         return <p>The water would boil.</p>;
     }
     return <p>The water would not boil.</p>
@@ -15,9 +15,10 @@ const CelsiusToFahrenheit = function(cel){
     return (cel * 9/5) + 32;
 }
 
-const Convertor = function(temperature, Convert){
-    if(Number.isNaN(temperature)) return "";
-    const result = Convert(parseFloat(temperature));
+const Convertor = function(temper, Convert){
+    temper = parseFloat(temper);
+    if(Number.isNaN(temper)) {return ""};
+    const result = Convert(parseFloat(temper));
     return Math.round(result).toString();
 }
 
@@ -35,17 +36,19 @@ class TemperatureInput extends Component{
             C: "Celsius",
             F: "Fahrenheit"
         }
-        const temperature = this.props.Temperature;
+        const temperature = this.props.temperature;
         const TemType = this.props.TempType;
         return(
             <div>
                 <legend>Enter temperature in {scaleName[TemType]}: </legend>
-                <input name={TemType} type="text" value={temperature} onChange={this.handleChange} />&deg;{TemType}
+                <input 
+                    type="text" 
+                    value={temperature} 
+                    onChange={this.handleChange} />&deg;{TemType}
             </div>
-        )
+        );
     }
 }
-
 
 class Calculator extends Component{
     constructor(props){
@@ -66,11 +69,11 @@ class Calculator extends Component{
         const fahrenheit = this.state.scale === 'C' ? Convertor(this.state.temperature, CelsiusToFahrenheit) : this.state.temperature;
         return(
             <div>
-                <TemperatureInput TempType="C" temperature={celsius} onTemperatureChange={this.handleCelsiusChange}/>
+                <TemperatureInput TempType="C" temperature={celsius} onTemperatureChange={this.handleCelsiusChange} />
                 <TemperatureInput TempType="F" temperature={fahrenheit} onTemperatureChange={this.handleFahrenheitChange} />
                 <BoilingVerdict type={this.state.scale} WaterTemperacture = {this.state.temperature} />
             </div>
-        )
+        );
     }
 }
 
