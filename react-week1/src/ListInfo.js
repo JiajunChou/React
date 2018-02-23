@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-class App extends Component {
+const BuyInfo = [
+  {id: "Sam", price: "$49.99", goods: "Football"},
+  {id: "Max", price: "$9.99", goods: "Baseball"},
+  {id: "Zac", price: "$29.99", goods: "Basketball"},
+];
+
+class ListInfo extends Component {
   constructor(props){
     super(props);
   }
@@ -23,4 +27,12 @@ class App extends Component {
   }
 }
 
-export default App;
+class Page extends Component{
+  render(){
+    return(
+      <ListInfo BuyList={BuyInfo} />
+    )
+  };
+}
+
+export default Page;

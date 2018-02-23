@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+// import './index.css';
 // import App from './App';
 // import './LogginForm.css';
 // import LoggingForm from './LogginForm';
 // import Calculator  from './LiftingStateUp';
+import Page from './ListInfo';
 import registerServiceWorker from './registerServiceWorker';
 
 registerServiceWorker();
@@ -12,30 +13,9 @@ registerServiceWorker();
 // ReactDOM.render(<LoggingForm />, document.getElementById('Loggin') );
 // ReactDOM.render(<Calculator  />, document.getElementById('LiftingStateUp'));
 
-// import ListUser from './component/UserInfo';
+// import ListInfo from './component/UserInfo';
 
-function ListUser(props){
-    const content = props.BuyList.map((BuyInfo) =>
-    <div key={BuyInfo.id}>
-      <label>
-          Name: {BuyInfo.id}
-          Goods: {BuyInfo.goods} Price: {BuyInfo.price}          
-      </label>
-    </div>
-    );
-    return (
-        <div>
-            {content}
-        </div>
-    )
-}
-
-const BuyInfo = [
-    {id: "Sam", price: "$49.99", goods: "Football"},
-    {id: "Max", price: "$9.99", goods: "Baseball"},
-    {id: "Zac", price: "$29.99", goods: "Basketball"},
-  ];
 ReactDOM.render(
-    <ListUser BuyList={BuyInfo} />,
+    <Page />,
     document.getElementById('Array')
 );
