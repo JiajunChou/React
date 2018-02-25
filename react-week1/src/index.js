@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 // import './LogginForm.css';
 // import LoggingForm from './LogginForm';
 // import Calculator  from './LiftingStateUp';
-import Page from './ListInfo';
+import PageView from './ListInfo';
 import registerServiceWorker from './registerServiceWorker';
 
 registerServiceWorker();
@@ -16,6 +16,6 @@ registerServiceWorker();
 // import ListInfo from './component/UserInfo';
 
 ReactDOM.render(
-    <Page />,
+    <PageView />,
     document.getElementById('Array')
 );
