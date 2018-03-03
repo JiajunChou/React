@@ -3,18 +3,10 @@ import React, { Component } from 'react';
 class Modify extends Component {
 constructor(props){
   super(props);
-  this.state = {
-    name: "Sam",
-    goods: "Football",
-    price: "$49.99"
-  }
 }
 
-handleChangeGood = (event) =>{
+handleChange = (event) =>{
   this.props.onGoodsChange(event.target.value);
-}
-
-handleChangePrice = (event) =>{
   this.props.onPriceChange(event.target.value);
 }
 
@@ -31,11 +23,11 @@ render(){
       <br />
       <label>
         物品:
-        <input name="goods" type="text"  value={goods} onChange={this.handleChangeGood} />
+        <input name="goods" type="text"  value={goods} onChange={this.handleChange} />
       </label>                
       <label>
         價格:
-        <input name="price" type="text" value={price} onChange={this.handleChangePrice}/>
+        <input name="price" type="text" value={price} onChange={this.handleChange}/>
       </label>
       <br />        
     </form>
@@ -43,8 +35,6 @@ render(){
   );
 }
 }
-
-
 
 class ListInfo extends Component {
 
@@ -80,13 +70,27 @@ constructor(props){
     {id: "Max", price: "$9.99", goods: "Baseball"},
     {id: "Zac", price: "$29.99", goods: "Basketball"}
   ];
-  this.state = {BuyInfo}
+  this.state = {BuyInfo};  
 }
+
+handleGoodsChange(){
+  this.setState({name:form.select.value, good: BuySomething[form.select.value].goods});
+}
+
+handlePriceChange(){
+  this.setState({name:form.select.value,price: BuySomething[form.select.value].price});
+}
+
    render(){
     const BuySomething = this.state.BuyInfo;
+    const name = "0";
+    const person = name === '0' ? 'Sam': name === '1' ? 'Max' : 'Zac'; 
+    const good = person === "Sam" ? BuySomething[0].goods : person === "Max" ? BuySomething[1].goods : BuySomething[2].goods;
+    const price = person === "Sam" ? BuySomething[0].price : person === "Max" ? BuySomething[1].price : BuySomething[2].price;
     
      return(
         <div>
+          <Modify name={person} goods={good} price={price} handleChangeGood={this.handleGoodsChange} handleChangePrice={this.handlePriceChange} />
           <ListInfo BuyList={BuySomething} />
         </div>
      )
