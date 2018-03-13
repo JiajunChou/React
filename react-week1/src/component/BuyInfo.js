@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 class Modify extends Component {
-constructor(props){
+  constructor(props){
   super(props);
 }
 
@@ -37,15 +37,19 @@ render(){
 }
 
 class ListInfo extends Component {
+  constructor(props){
+    super(props);    
+  }
 
-  handleSubmit = (event) => {
+  handleOptionChange = (event) => {
+    this.props.handleSelectChange(event.target.value);
     event.preventDefault();
   }
   render(){
-    const content = this.props.BuyList.map((BuyInfo, index) => {
+    const content = this.props.BuyList.map((BuyInfo) => {
       return(
         <div key={BuyInfo.id}>
-          <input type="radio" name="select" value={index}/>
+          <input type="radio" name="select" value={BuyInfo.id} checked={this.props.selectedOption === BuyInfo.id} onChange={this.handleOptionChange} />
           <label>
             Name: {BuyInfo.id}
             <br />
@@ -55,46 +59,42 @@ class ListInfo extends Component {
       )     
     });
     return (
-      <form onSubmit={this.handleSubmit}>
+      <div>
           {content}
-      </form>
+      </div>
     )
   }
 }
 
 class PageView extends Component{
-constructor(props){
-  super(props);
-  const BuyInfo = [
-    {id: "Sam", price: "$49.99", goods: "Football"},
-    {id: "Max", price: "$9.99", goods: "Baseball"},
-    {id: "Zac", price: "$29.99", goods: "Basketball"}
-  ];
-  this.state = {BuyInfo};  
-}
+  constructor(props){
+    super(props);
+    this.state = {idx: 0};  
+  };
 
-handleGoodsChange(){
-  this.setState({name:form.select.value, good: BuySomething[form.select.value].goods});
-}
-
-handlePriceChange(){
-  this.setState({name:form.select.value,price: BuySomething[form.select.value].price});
-}
+  handleModifyChange = (idx) => {
+    this.setState({idx: 1});
+  }
 
    render(){
-    const BuySomething = this.state.BuyInfo;
-    const name = "0";
-    const person = name === '0' ? 'Sam': name === '1' ? 'Max' : 'Zac'; 
-    const good = person === "Sam" ? BuySomething[0].goods : person === "Max" ? BuySomething[1].goods : BuySomething[2].goods;
-    const price = person === "Sam" ? BuySomething[0].price : person === "Max" ? BuySomething[1].price : BuySomething[2].price;
+    const BuySomething = this.props.BuyInfo;
+    const idx = this.state.idx;
+    var person = "";
+    if ((idx % 2) === 0) {
+      person = "Sam";
+    } else {
+      person = "Max";
+    }
+    const good = person === "Sam" ? BuySomething[0].goods : BuySomething[1].goods;
+    const price = person === "Sam" ? BuySomething[0].price : BuySomething[1].price;
     
      return(
         <div>
-          <Modify name={person} goods={good} price={price} handleChangeGood={this.handleGoodsChange} handleChangePrice={this.handlePriceChange} />
-          <ListInfo BuyList={BuySomething} />
+          <Modify name={person} goods={good} price={price} />
+          <ListInfo BuyList={BuySomething} selectedOption={person} handleSelectChange={this.handleModifyChange} />
         </div>
      )
    };
  }
  
-export default PageView; 
+export default PageView;
