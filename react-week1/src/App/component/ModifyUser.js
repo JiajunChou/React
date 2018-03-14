@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 class ModifyUser extends Component {
   
   handleChange = (event) =>{
-    this.props.onGoodsChange(event.target.value);
-    this.props.onPriceChange(event.target.value);
+    if(event.target.name === "goods" ) this.props.onGoodsChange(event.target.value);
+    if(event.target.name === "price" ) this.props.onPriceChange(event.target.value); 
   }
   
   render(){
@@ -31,7 +31,7 @@ class ModifyUser extends Component {
               name="price" 
               type="text" 
               value={price} 
-              onChange={this.handleChange}/>              
+              onChange={this.handleChange} />              
         </label>
         <br />        
       </form>
