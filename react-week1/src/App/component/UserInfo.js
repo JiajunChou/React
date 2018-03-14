@@ -29,6 +29,42 @@ class UserInfo extends Component{
     } 
   }
 
+  handleGoodChange = (event) => {
+    if(this.state.initIdex === "0"){
+      this.setState({
+        items: [
+          {id: "Sam", price: "$49.99", goods: event},
+          {id: "Max", price: "$9.99", goods: "Baseball"}
+        ]        
+      });
+    } else if(this.state.initIdex === "1"){
+      this.setState({
+        items: [
+          {id: "Sam", price: "$49.99", goods: "Football"},
+          {id: "Max", price: "$9.99", goods: event}
+        ]        
+      });
+    }
+  }
+
+  handlePriceChange = (event) => {
+    if(this.state.initIdex === "0"){
+      this.setState({
+        items: [
+          {id: "Sam", price: event, goods: "Football"},
+          {id: "Max", price: "$9.99", goods: "Baseball"}
+        ]        
+      });
+    } else if(this.state.initIdex === "1"){
+      this.setState({
+        items: [
+          {id: "Sam", price: "$49.99", goods: "Football"},
+          {id: "Max", price: event, goods: "Baseball"}
+        ]        
+      });
+    }
+  }
+
   render(){
     const initIndex = this.state.initIdex;
      return(
@@ -42,7 +78,7 @@ class UserInfo extends Component{
           </div>
           <h2> Modify Area </h2>
           <div>
-            <ModifyUser name={this.state.items[initIndex].id} goods={this.state.items[initIndex].goods} price={this.state.items[initIndex].price}/>
+            <ModifyUser name={this.state.items[initIndex].id} goods={this.state.items[initIndex].goods} price={this.state.items[initIndex].price} onGoodsChange={this.handleGoodChange} onPriceChange={this.handlePriceChange} />
           </div>
       </div>
      )

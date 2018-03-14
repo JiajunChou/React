@@ -9,7 +9,7 @@ class UserItems extends React.Component {
         return (
             <div>
                 <h3>                
-                <input type="radio" value={this.props.index} checked={this.props.check} onClick={this.handleClick} />{this.props.buyer}
+                <input type="radio" value={this.props.index} checked={this.props.check} onClick={this.handleClick} readOnly/>{this.props.buyer}
                 </h3>           
                 <label>
                 &nbsp;&nbsp;&nbsp;&nbsp; Goods: {this.props.goods}
