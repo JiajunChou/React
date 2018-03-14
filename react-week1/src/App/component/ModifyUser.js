@@ -14,8 +14,7 @@ class ModifyUser extends Component {
     const name = this.props.name;
     const goods = this.props.goods;
     const price = this.props.price;
-    return(
-    <div>
+    return(    
       <form>
         <label>
           Name: {name}
@@ -31,7 +30,6 @@ class ModifyUser extends Component {
         </label>
         <br />        
       </form>
-    </div>
     );
   }
   }
