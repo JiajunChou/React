@@ -9,9 +9,10 @@ class UserInfo extends Component{
       initIdex: "0",
       items: [
         {id: "Sam", price: "$49.99", goods: "Football"},
-        {id: "Max", price: "$9.99", goods: "Baseball"}
+        {id: "Max", price: "$9.99", goods: "Baseball"},
+        {id: "Zac", price: "$29.99", goods: "Basketball"}
       ],
-      checked: [true, false]
+      checked: [true, false, false]
     }
   };
 
@@ -19,14 +20,19 @@ class UserInfo extends Component{
     if(event === "0") {
       this.setState({
         initIdex: event,       
-        checked: [true, false]
+        checked: [true, false, false]
       });
     }
     if(event === "1") {
       this.setState({
         initIdex: event,
-        checked: [false, true]});
-    } 
+        checked: [false, true, false]});
+    }
+    if(event === "2") {
+      this.setState({
+        initIdex: event,
+        checked: [false, false, true]});
+    }  
   }
 
   handleGoodChange = (event) => {
@@ -34,14 +40,24 @@ class UserInfo extends Component{
       this.setState({
         items: [
           {id: "Sam", price: "$49.99", goods: event},
-          {id: "Max", price: "$9.99", goods: "Baseball"}
+          {id: "Max", price: "$9.99", goods: "Baseball"},
+          {id: "Zac", price: "$29.99", goods: "Basketball"}
         ]        
       });
     } else if(this.state.initIdex === "1"){
       this.setState({
         items: [
           {id: "Sam", price: "$49.99", goods: "Football"},
-          {id: "Max", price: "$9.99", goods: event}
+          {id: "Max", price: "$9.99", goods: event},
+          {id: "Zac", price: "$29.99", goods: "Basketball"}
+        ]        
+      });
+    } else if(this.state.initIdex === "2"){
+      this.setState({
+        items: [
+          {id: "Sam", price: "$49.99", goods: "Football"},
+          {id: "Max", price: "$9.99", goods: "Baseball"},
+          {id: "Zac", price: "$29.99", goods: event}
         ]        
       });
     }
@@ -52,14 +68,24 @@ class UserInfo extends Component{
       this.setState({
         items: [
           {id: "Sam", price: event, goods: "Football"},
-          {id: "Max", price: "$9.99", goods: "Baseball"}
+          {id: "Max", price: "$9.99", goods: "Baseball"},
+          {id: "Zac", price: "$29.99", goods: "Basketball"}          
         ]        
       });
     } else if(this.state.initIdex === "1"){
       this.setState({
         items: [
           {id: "Sam", price: "$49.99", goods: "Football"},
-          {id: "Max", price: event, goods: "Baseball"}
+          {id: "Max", price: event, goods: "Baseball"},
+          {id: "Zac", price: "$29.99", goods: "Basketball"}
+        ]        
+      });
+    } else if(this.state.initIdex === "2"){
+      this.setState({
+        items: [
+          {id: "Sam", price: "$49.99", goods: "Football"},
+          {id: "Max", price: "$9.99", goods: "Baseball"},
+          {id: "Zac", price: event, goods: "Basketball"}
         ]        
       });
     }
