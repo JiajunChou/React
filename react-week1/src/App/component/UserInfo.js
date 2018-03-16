@@ -2,113 +2,80 @@ import React, { Component } from 'react';
 import ModifyUser from './ModifyUser';
 import UserItem from './UserItem';
 
+const Items = [
+  { id: "Sam", price: "$49.99", goods: "Football" },
+  { id: "Max", price: "$9.99", goods: "Baseball" },
+  { id: "Zac", price: "$29.99", goods: "Basketball" }
+];
+
 class UserInfo extends Component{
-  constructor(props){
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      initIdex: "0",
-      items: [
-        {id: "Sam", price: "$49.99", goods: "Football"},
-        {id: "Max", price: "$9.99", goods: "Baseball"},
-        {id: "Zac", price: "$29.99", goods: "Basketball"}
-      ],
-      checked: [true, false, false]
-    }
+      items: Items,
+      checked: 0
+    };
   };
 
-  handleSelectChange = (event) => {
-    if(event === "0") {
-      this.setState({
-        initIdex: event,       
-        checked: [true, false, false]
-      });
-    }
-    if(event === "1") {
-      this.setState({
-        initIdex: event,
-        checked: [false, true, false]});
-    }
-    if(event === "2") {
-      this.setState({
-        initIdex: event,
-        checked: [false, false, true]});
-    }  
+  handleSelect = index => this.setState({ checked: index });
+
+  handleGoodChange = newValue => {
+    const { items, checked } = this.state;
+    const newItems = items.map((ele, index) => {
+      if(index !== checked)
+        return ele;
+      return {
+        ...ele,
+        goods: newValue
+      }
+    });
+    this.setState({ items: newItems });
   }
 
-  handleGoodChange = (event) => {
-    if(this.state.initIdex === "0"){
-      this.setState({
-        items: [
-          {id: "Sam", price: "$49.99", goods: event},
-          {id: "Max", price: "$9.99", goods: "Baseball"},
-          {id: "Zac", price: "$29.99", goods: "Basketball"}
-        ]        
-      });
-    } else if(this.state.initIdex === "1"){
-      this.setState({
-        items: [
-          {id: "Sam", price: "$49.99", goods: "Football"},
-          {id: "Max", price: "$9.99", goods: event},
-          {id: "Zac", price: "$29.99", goods: "Basketball"}
-        ]        
-      });
-    } else if(this.state.initIdex === "2"){
-      this.setState({
-        items: [
-          {id: "Sam", price: "$49.99", goods: "Football"},
-          {id: "Max", price: "$9.99", goods: "Baseball"},
-          {id: "Zac", price: "$29.99", goods: event}
-        ]        
-      });
-    }
+  handlePriceChange = newValue => {
+    const { items, checked } = this.state;
+    const newItems = items.map((ele, index) => {
+      if(index !== checked)
+        return ele;
+      return {
+        ...ele,
+        price: newValue
+      }
+    })
+    this.setState({ items: newItems });
   }
-
-  handlePriceChange = (event) => {
-    if(this.state.initIdex === "0"){
-      this.setState({
-        items: [
-          {id: "Sam", price: event, goods: "Football"},
-          {id: "Max", price: "$9.99", goods: "Baseball"},
-          {id: "Zac", price: "$29.99", goods: "Basketball"}          
-        ]        
-      });
-    } else if(this.state.initIdex === "1"){
-      this.setState({
-        items: [
-          {id: "Sam", price: "$49.99", goods: "Football"},
-          {id: "Max", price: event, goods: "Baseball"},
-          {id: "Zac", price: "$29.99", goods: "Basketball"}
-        ]        
-      });
-    } else if(this.state.initIdex === "2"){
-      this.setState({
-        items: [
-          {id: "Sam", price: "$49.99", goods: "Football"},
-          {id: "Max", price: "$9.99", goods: "Baseball"},
-          {id: "Zac", price: event, goods: "Basketball"}
-        ]        
-      });
-    }
-  }
-
-  render(){
-    const initIndex = this.state.initIdex;
-     return(
+  render() {
+    return (
       <div>
-          <div>
+        <div>
           {
-            this.state.items.map((obj, index) =>{
-              return <UserItem key={index} buyer={obj.id} goods={obj.goods} prices={obj.price} index={index}   check={this.state.checked[index]} onItemsClick={this.handleSelectChange} />
+            this.state.items.map((obj, index) => {
+              return (
+                <UserItem
+                  key={index}
+                  index={index}
+                  check={this.state.checked === index}
+                  buyer={obj.id}
+                  data={obj}
+                  onItemsClick={this.handleSelect}
+                />
+              );
             })
           }
-          </div>
-          <h2> Modify Area </h2>
-          <div>
-            <ModifyUser name={this.state.items[initIndex].id} goods={this.state.items[initIndex].goods} price={this.state.items[initIndex].price} onGoodsChange={this.handleGoodChange} onPriceChange={this.handlePriceChange} />
-          </div>
+        </div>
+        <h2> Modify Area </h2>
+        <div>
+          <ModifyUser
+            currentSelected={this.state.checked}
+            name={this.state.items[this.state.checked].id}
+            data={this.state.items[this.state.checked]}
+            onGoodsChange={this.handleGoodChange}
+            onPriceChange={this.handlePriceChange}
+          />
+        </div>
       </div>
      )
   };
 }
- 
+
 export default UserInfo;

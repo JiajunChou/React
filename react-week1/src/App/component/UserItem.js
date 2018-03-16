@@ -1,26 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-class UserItems extends React.Component {
+class UserItems extends Component {
+  render(){
+    const { price, goods } = this.props.data;
+    return (
+      <div>
+        <h3>
+          <input type="radio"
+            checked={this.props.check}
+            onChange={() => this.props.onItemsClick(this.props.index)}
+          />
+          {this.props.buyer}
+        </h3>
+        <label style={{ paddingLeft: 24 }}>
+          Goods: {goods}
+        </label>
 
-    handleClick = (e) => {
-        this.props.onItemsClick(e.target.value);
-    };
-    render(){
-        return (
-            <div>
-                <h3>                
-                <input type="radio" value={this.props.index} checked={this.props.check} onClick={this.handleClick} readOnly/>{this.props.buyer}
-                </h3>           
-                <label>
-                &nbsp;&nbsp;&nbsp;&nbsp; Goods: {this.props.goods}
-                </label>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <label>
-                    Prices: {this.props.prices}
-                </label>
-            </div>            
-        )
-    }
+        <label style={{ marginLeft: 16 }}>
+          Prices: {price}
+        </label>
+      </div>
+    )
+  }
 }
 
 export default UserItems;
