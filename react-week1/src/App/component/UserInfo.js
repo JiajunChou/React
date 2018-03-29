@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ModifyUser from './ModifyUser';
 import UserItem from './UserItem';
+import TodoList from './TodoList';
 
 const Items = [
   { id: "Sam", price: "$49.99", goods: "Football" },
@@ -47,6 +48,9 @@ class UserInfo extends Component{
   render() {
     return (
       <div>
+        <div>
+          <TodoList />
+        </div>
         <div>
           {
             this.state.items.map((obj, index) => {
