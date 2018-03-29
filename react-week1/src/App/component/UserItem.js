@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class UserItems extends Component {
+class UserItem extends Component {
   render(){
     const { price, goods } = this.props.data;
     return (
@@ -10,7 +10,7 @@ class UserItems extends Component {
             checked={this.props.check}
             onChange={() => this.props.onItemsClick(this.props.index)}
           />
-          {this.props.buyer}
+          <label onDoubleClick={() => this.props.onItemDoubleClick(this.props.index)}>{this.props.buyer}</label>
         </h3>
         <label style={{ paddingLeft: 24 }}>
           Goods: {goods}
@@ -24,4 +24,4 @@ class UserItems extends Component {
   }
 }
 
-export default UserItems;
+export default UserItem;

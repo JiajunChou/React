@@ -1,36 +1,56 @@
 import React, { Component } from 'react';
-import TodoItem from './TodoItem';
+import UserItem from './UserItem';
 
 class TodoList extends Component {
     constructor() {
         super();
         this.state = {
-            Items: [],
+            obj: [],
             inputValue: ""
         }
     };
+
     handleChange = (e) => {
         this.setState({
             inputValue: e.target.value
         });
     };
+
     handelPressKey = (e) => {
         if(e.key === 'Enter' ){
-            const newItems = [...this.state.Items, e.target.value ];
+            const newObj = [...this.state.obj, e.target.value ];
             this.setState({
-                Items: newItems,
+                obj: newObj,
                 inputValue: ''
             })
         }
-    }
+    };
+
+    handleRemove = (index) => {
+        const oldItem = this.state.obj;
+        const newObj = oldItem.slice(0, index).concat(oldItem.slice(index+1))
+        this.setState({
+            obj: newObj
+        })
+    };
+
     render(){
         return(
-            <div>
-                <input value={this.state.inputValue} type="text" onChange={this.handleChange} onKeyPress={this.handelPressKey} />
+            <div>Name: 
+                <input style={{ marginLeft: 16 }} value={this.state.inputValue} type="text" onChange={this.handleChange} onKeyPress={this.handelPressKey} />
                 <ul>
                 {
-                    this.state.Items.map((value, index) => {
-                        return(<TodoItem key={index} text={value} handleItemClick={this.state.handleChange} />)
+                    this.state.obj.map((value, index) => {
+                        return(
+                          <UserItem 
+                            key={index}
+                            index={index}
+                            check={this.state.checked === index}
+                            buyer={value}
+                            data={this.state.obj}
+                            onItemsClick={this.handleChange} 
+                            onItemDoubleClick={this.handleRemove}/>
+                            )
                     })
                 }
                 </ul>              
