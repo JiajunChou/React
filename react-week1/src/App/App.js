@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import UserInfo from './component/UserInfo';
+import UserInfo from './container/UserInfo';
 
 class App extends Component {
   render() {

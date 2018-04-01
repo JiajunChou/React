@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import ModifyUser from './ModifyUser';
-import UserItem from './UserItem';
-import TodoList from './TodoList';
+import ModifyUser from '../component/ModifyUser.js';
+import UserItem from '../component/UserItem';
+import TodoList from '../component/TodoList';
 
 const Items = [
-  { id: "Sam", price: "$49.99", goods: "Football" },
-  { id: "Max", price: "$9.99", goods: "Baseball" },
-  { id: "Zac", price: "$29.99", goods: "Basketball" }
+  {id_no: 0, id: "Sam", price: "$49.99", goods: "Football" },
+  {id_no: 1, id: "Max", price: "$9.99", goods: "Baseball" },
+  {id_no: 2, id: "Zac", price: "$29.99", goods: "Basketball" }
 ];
 
 class UserInfo extends Component{
@@ -14,37 +14,39 @@ class UserInfo extends Component{
     super();
     this.state = {
       items: Items,
-      checked: 0
+      checked: 0,
+      id_index: 2
     };
   };
 
   handleSelect = index => this.setState({ checked: index });
 
-  handleGoodChange = newValue => {
+  handleItemAttrChange = (newValue, type) => {
     const { items, checked } = this.state;
     const newItems = items.map((ele, index) => {
-      if(index !== checked)
-        return ele;
-      return {
-        ...ele,
-        goods: newValue
+      switch (type){
+        case "good":
+             if(index !== checked)
+                 return ele;
+             return {
+              ...ele,
+              goods: newValue
+             }
+        case "price":
+             if(index !== checked)
+                 return ele;
+             return {
+              ...ele,
+              price: newValue
+             }
+        default:
+             return {};
       }
     });
     this.setState({ items: newItems });
-  }
+  };
+  
 
-  handlePriceChange = newValue => {
-    const { items, checked } = this.state;
-    const newItems = items.map((ele, index) => {
-      if(index !== checked)
-        return ele;
-      return {
-        ...ele,
-        price: newValue
-      }
-    })
-    this.setState({ items: newItems });
-  }
   render() {
     return (
       <div>
@@ -73,8 +75,8 @@ class UserInfo extends Component{
             currentSelected={this.state.checked}
             name={this.state.items[this.state.checked].id}
             data={this.state.items[this.state.checked]}
-            onGoodsChange={this.handleGoodChange}
-            onPriceChange={this.handlePriceChange}
+            onGoodChange={this.handleItemAttrChange}
+            onPriceChange={this.handleItemAttrChange}
           />
         </div>
       </div>

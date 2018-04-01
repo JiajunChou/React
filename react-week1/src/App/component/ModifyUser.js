@@ -2,14 +2,10 @@ import React, { Component } from 'react';
 
 class ModifyUser extends Component {
 
-  handleChange = (event) =>{
-    if(event.target.name === "goods" ) this.props.onGoodsChange(event.target.value);
-    if(event.target.name === "price" ) this.props.onPriceChange(event.target.value);
-  }
-
   render(){
     const { name } = this.props;
     const { goods, price } = this.props.data;
+    const { onGoodChange, onPriceChange } = this.props;
     return(
       <form>
         <label>
@@ -22,7 +18,7 @@ class ModifyUser extends Component {
             name="goods"
             type="text"
             value={goods}
-            onChange={e => this.props.onGoodsChange(e.target.value)} />
+            onChange={e => onGoodChange(e.target.value, "good")} />
         </label>
         <label>
           價格:
@@ -30,7 +26,7 @@ class ModifyUser extends Component {
             name="price"
             type="text"
             value={price}
-            onChange={e => this.props.onPriceChange(e.target.value)} />
+            onChange={e => onPriceChange(e.target.value, "price")} />
         </label>
         <br />
       </form>
