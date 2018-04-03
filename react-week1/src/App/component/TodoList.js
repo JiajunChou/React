@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import UserItem from './UserItem';
 
 class TodoList extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            obj: [],
+            obj: this.props.item,
             inputValue: ""
         }
     };

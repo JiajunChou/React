@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ModifyUser from '../component/ModifyUser.js';
 import UserItem from '../component/UserItem';
-import TodoList from '../component/TodoList';
 
 const Items = [
   {id_no: 0, id: "Sam", price: "$49.99", goods: "Football" },
@@ -13,17 +12,44 @@ class UserInfo extends Component{
   constructor() {
     super();
     this.state = {
-      items: Items,
+      item: Items,
       checked: 0,
-      id_index: 2
+      inputValue: '',
+      id_index: 0
     };
   };
+  
+  handleSelect = e => {
+    this.setState({ checked: e.target.value });
+  }
 
-  handleSelect = index => this.setState({ checked: index });
+  handleChange = (e) => {
+    this.setState({
+        inputValue: e.target.value
+    });
+  };
+
+  handelPressKey = (e) => {
+      if(e.key === 'Enter' ){
+          const newObj = [...this.state.item, e.target.value ];
+          this.setState({
+              item: newObj,
+              inputValue: ''
+          })
+      }
+  };
+  
+  handleRemove = (index) => {
+      const oldItem = this.state.item;
+      const newObj = oldItem.slice(0, index).concat(oldItem.slice(index+1))
+      this.setState({
+          item: newObj
+      })
+  };
 
   handleItemAttrChange = (newValue, type) => {
-    const { items, checked } = this.state;
-    const newItems = items.map((ele, index) => {
+    const { item, checked } = this.state;
+    const newItems = item.map((ele, index) => {
       switch (type){
         case "good":
              if(index !== checked)
@@ -43,38 +69,35 @@ class UserInfo extends Component{
              return {};
       }
     });
-    this.setState({ items: newItems });
+    this.setState({ item: newItems });
   };
   
-
   render() {
     return (
       <div>
-        <div>
-          <TodoList />
-        </div>
-        <div>
-          {
-            this.state.items.map((obj, index) => {
-              return (
-                <UserItem
-                  key={index}
-                  index={index}
-                  check={this.state.checked === index}
-                  buyer={obj.id}
-                  data={obj}
-                  onItemsClick={this.handleSelect}
-                />
-              );
-            })
-          }
-        </div>
+            <div>Name: 
+                <input style={{ marginLeft: 16 }} value={this.state.inputValue} type="text" onChange={this.handleChange} onKeyPress={this.state.handelPressKey} />
+                <ul>
+                {
+                    this.state.item.map((value) => {
+                        return(                          
+                          <UserItem 
+                            key={value.id_no}
+                            data={value}
+                            check={this.state.checked == value.id_no}
+                            onItemClick={this.handleSelect}
+                            onItemDoubleClick={this.state.handleRemove} />
+                            )
+                    })
+                }
+                </ul>              
+            </div>
         <h2> Modify Area </h2>
         <div>
           <ModifyUser
             currentSelected={this.state.checked}
-            name={this.state.items[this.state.checked].id}
-            data={this.state.items[this.state.checked]}
+            name={this.state.item[this.state.checked].id}
+            data={this.state.item[this.state.checked]}
             onGoodChange={this.handleItemAttrChange}
             onPriceChange={this.handleItemAttrChange}
           />
